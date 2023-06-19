@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  <!-- Bootstrap CSS v5.2.1 -->
+<link rel="stylesheet" href="css/mdb.min.css">
+<style>
+    body{
+        background-color:#fafafa;
+    }
+    section{
+        padding:50px 0;
+    }
+</style>
+</head>
+<body>
+       <section>
+            <div class="container clearfix">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card py-5">
+                            <div class="card-body text-center">
+                                <p id="joketext"></p>
+                                <button class="btn btn-primary" id="fetchjoke">Generate Jokes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </section>
+    
+ 
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/mdb.min.js"></script>
+  <script>
+      $(document).ready(function() {   
+      $("#fetchjoke").click(function() {    
+       
+        $.ajax({
+          url: "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single", 
+          type: "GET",
+          dataType: "json",
+          success: function(response) {          
+            var joke = response.joke;        
+            $("#joketext").text(joke);
+          },
+          error: function(xhr, status, error) {
+            console.log("Error: " + error);
+          }
+        });
+      });
+    });
+  </script>
+  
+
+</body>
+</html>
